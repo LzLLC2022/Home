@@ -1,401 +1,1032 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lz - 혁신적인 솔루션의 선도기업</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lz — 시스템 통합 & 인프라 컨설팅</title>
+  <meta name="description" content="Lz는 기업 IT 시스템 통합 자문·구축과 인프라 운영 프로세스 컨설팅을 전문으로 합니다. 최첨단 기술과 축적된 노하우로 고객의 비즈니스 성공을 이끕니다.">
+  <meta property="og:title" content="Lz — 시스템 통합 & 인프라 컨설팅">
+  <meta property="og:description" content="기업 IT 시스템 통합 자문·구축과 인프라 운영 프로세스 컨설팅 전문기업">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.lim.kr">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:   #0a0a0a;
+      --white:   #f8f6f0;
+      --accent:  #c8ff00;
+      --gray1:   #1a1a1a;
+      --gray2:   #2a2a2a;
+      --gray3:   #555;
+      --gray4:   #888;
+      --gray5:   #bbb;
+      --border:  rgba(255,255,255,0.08);
+      --font-sans: 'Noto Sans KR', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --radius:  4px;
+      --max:     1200px;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
+    html { scroll-behavior: smooth; }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    /* ── 스크롤바 ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--gray1); }
+    ::-webkit-scrollbar-thumb { background: var(--gray3); border-radius: 2px; }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
+    /* ── 선택 영역 ── */
+    ::selection { background: var(--accent); color: var(--black); }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
+    /* ── 공통 레이아웃 ── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+    /* ══════════════════════════════════
+       NAV
+    ══════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--gray4);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; color: var(--white); font-size: 1.4rem; }
 
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-            position: relative;
-            padding: 2rem;
-        }
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease;
-        }
+    /* 배경 그리드 */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+    }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
+    /* 배경 글로우 */
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,255,0,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
 
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
+    .hero-inner {
+      max-width: var(--max); margin: 0 auto; width: 100%;
+      position: relative; z-index: 1;
+    }
 
-        /* Services Cards */
-        .services-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block; width: 24px; height: 1px;
+      background: var(--accent);
+    }
 
-        .service-mini-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
+    .hero-h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+    }
 
-        .service-mini-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-        }
+    .hero-desc {
+      max-width: 520px;
+      font-size: 1.05rem;
+      color: var(--gray4);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
 
-        .service-mini-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      background: var(--accent);
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; font-weight: 400;
+      color: var(--gray5);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); color: var(--white); transform: translateY(-1px); }
 
-        .service-mini-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: var(--font-mono);
+      font-size: 2rem; font-weight: 500;
+      color: var(--white);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray4);
+      margin-top: 0.25rem;
+    }
 
-        .service-mini-card p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
+    /* ══════════════════════════════════
+       TICKER
+    ══════════════════════════════════ */
+    .ticker-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex; gap: 0;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 1.5rem;
+      padding: 0 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .ticker-dot {
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-        /* Company Stats */
-        .stats-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-            animation: fadeInUp 1s ease 0.8s both;
-        }
+    /* ══════════════════════════════════
+       SECTION 공통
+    ══════════════════════════════════ */
+    section { padding: 7rem 0; }
+    .section-header { margin-bottom: 4rem; }
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray4);
+      margin-top: 0.75rem;
+      max-width: 480px;
+    }
 
-        .stat-mini {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
+    /* ══════════════════════════════════
+       SERVICES
+    ══════════════════════════════════ */
+    #services { background: var(--gray1); }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
 
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
+    .service-card {
+      background: var(--gray1);
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover { background: var(--gray2); }
+    .service-card:hover::before { transform: scaleX(1); }
 
-        /* Contact Info */
-        .contact-showcase {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeInUp 1s ease 1s both;
-        }
+    .service-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gray3);
+      margin-bottom: 0.75rem;
+    }
+    .service-name {
+      font-size: 1.1rem; font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--gray4);
+      line-height: 1.75;
+    }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--gray3);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
 
-        .contact-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+    /* ══════════════════════════════════
+       WHY US
+    ══════════════════════════════════ */
+    #why { background: var(--black); }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .why-left { }
+    .why-right { }
 
-        .business-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
+    .why-list { list-style: none; margin-top: 2rem; }
+    .why-item {
+      display: flex; gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .why-item:first-child { border-top: 1px solid var(--border); }
+    .why-bullet {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.6rem;
+    }
+    .why-item-title {
+      font-size: 0.95rem; font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .why-item-desc {
+      font-size: 0.85rem;
+      color: var(--gray4);
+      line-height: 1.7;
+    }
 
-        .business-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
-        }
+    /* 오른쪽 수치 카드 */
+    .why-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .why-card {
+      background: var(--gray1);
+      padding: 2rem;
+    }
+    .why-card-num {
+      font-family: var(--font-mono);
+      font-size: 2.2rem; font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .why-card-label {
+      font-size: 0.82rem;
+      color: var(--gray4);
+      line-height: 1.5;
+    }
 
-        .business-item i {
-            font-size: 1.5rem;
-            width: 30px;
-        }
+    /* ══════════════════════════════════
+       PROCESS
+    ══════════════════════════════════ */
+    #process { background: var(--gray1); }
 
-        .business-item span {
-            font-size: 0.95rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
+    .process-list { list-style: none; }
+    .process-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: opacity 0.3s;
+    }
+    .process-item:first-child { border-top: 1px solid var(--border); }
+    .process-item:hover { opacity: 0.85; }
 
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
-        }
+    .process-step {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gray3);
+      letter-spacing: 0.1em;
+      padding-top: 0.25rem;
+    }
+    .process-step strong {
+      display: block;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.12);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .process-content { }
+    .process-name {
+      font-size: 1rem; font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .process-desc {
+      font-size: 0.88rem;
+      color: var(--gray4);
+      line-height: 1.75;
+    }
 
-        .contact-item i {
-            font-size: 1.5rem;
-            width: 30px;
-        }
+    /* ══════════════════════════════════
+       CONTACT
+    ══════════════════════════════════ */
+    #contact { background: var(--black); }
 
-        .contact-item span {
-            font-size: 0.95rem;
-        }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-left { }
+    .contact-info {
+      margin-top: 2rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact-info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .contact-info-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gray3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-width: 60px;
+      padding-top: 0.1rem;
+    }
+    .contact-info-val {
+      font-size: 0.88rem;
+      color: var(--gray5);
+      line-height: 1.6;
+    }
+    .contact-info-val a {
+      color: var(--gray5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-info-val a:hover { color: var(--accent); }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* 폼 */
+    .contact-form {
+      background: var(--gray1);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--gray4);
+      letter-spacing: 0.04em;
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: rgba(200,255,0,0.4);
+    }
+    .form-select { cursor: pointer; }
+    .form-select option { background: var(--gray1); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .form-submit:hover { opacity: 0.85; }
 
-        /* Footer */
-        .footer-minimal {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            opacity: 0.7;
-            animation: fadeInUp 1s ease 1.2s both;
-        }
+    /* ══════════════════════════════════
+       FOOTER
+    ══════════════════════════════════ */
+    footer {
+      background: var(--gray1);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--gray4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--gray3);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
+    /* ══════════════════════════════════
+       FADE-IN 애니메이션
+    ══════════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 900px) {
+      .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+      nav.menu-open .nav-links {
+        display: flex; flex-direction: column;
+        position: fixed; inset: 0; top: 64px;
+        background: var(--black);
+        padding: 2rem;
+        border-top: 1px solid var(--border);
+        gap: 1.5rem;
+        z-index: 99;
+      }
+      nav.menu-open .nav-links a { font-size: 1rem; }
+    }
 
-            .hero-description {
-                font-size: 1rem;
-            }
-
-            .services-showcase {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .stats-showcase {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-content {
-                padding: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 2rem;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .stats-showcase {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    @media (max-width: 600px) {
+      .hero-stats { flex-direction: column; gap: 1.5rem; }
+      .why-cards { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">Lz</div>
-        </nav>
-    </header>
 
-    <!-- Main Hero Section (전체 페이지) -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Lz</h1>
-            <div class="hero-subtitle">혁신적인 솔루션의 선도기업</div>
-            <div class="hero-description">
-                최첨단 기술과 창의적 아이디어로 고객의 성공을 이끌어갑니다.<br>
-                축적된 노하우로 최고의 서비스를 제공합니다.
-            </div>
-            <div class="contact-showcase">
-                <div class="contact-grid">
-                    <div class="business-item">
-                        시스템 통합 자문 및 구축
-                    </div>
-                </div>
-                <div class="contact-grid">
-                    <div class="business-item">
-                        인프라운영 프로세스 컨설팅 및 운영
-                    </div>
-                </div>
-            </div>
-            <div class="hero-description">
-            </div>
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Lz<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">서비스</a></li>
+    <li><a href="#why">회사소개</a></li>
+    <li><a href="#process">진행방식</a></li>
+    <li><a href="#contact">문의</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">문의하기</a>
+  <button class="nav-mobile-btn" id="mobileBtn" aria-label="메뉴">☰</button>
+</nav>
 
-            <!-- 연락처 정보 -->
-            <div class="contact-showcase">
-                <div class="contact-title">문의하기</div>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <i>✉️</i>
-                        <span>company@lim.kr</span>
-                    </div>
-                </div>
-            </div>
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">IT Infrastructure & System Integration</div>
+    <h1 class="hero-h1">
+      기업의 IT 인프라,<br>
+      <em>처음부터 끝까지</em><br>
+      함께합니다.
+    </h1>
+    <p class="hero-desc">
+      Lz는 시스템 통합 자문·구축과 인프라 운영 프로세스 컨설팅을 전문으로 합니다.
+      최첨단 기술과 축적된 노하우로 고객의 비즈니스 성공을 이끌어갑니다.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        무료 상담 신청
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#services" class="btn-secondary">서비스 살펴보기</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label">년 업력</div>
+      </div>
+      <div>
+        <div class="stat-num">100<span>+</span></div>
+        <div class="stat-label">프로젝트 수행</div>
+      </div>
+      <div>
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">고객 재계약률</div>
+      </div>
+      <div>
+        <div class="stat-num">24<span>/7</span></div>
+        <div class="stat-label">운영 지원</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <!-- 2회 반복으로 무한 루프 -->
+    <span class="ticker-item"><span class="ticker-dot"></span>시스템 통합 구축</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>인프라 운영 컨설팅</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>클라우드 마이그레이션</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>네트워크 설계</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>보안 아키텍처</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>프로세스 최적화</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>24/7 모니터링</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>기술 자문</span>
+    <!-- 복제 -->
+    <span class="ticker-item"><span class="ticker-dot"></span>시스템 통합 구축</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>인프라 운영 컨설팅</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>클라우드 마이그레이션</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>네트워크 설계</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>보안 아키텍처</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>프로세스 최적화</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>24/7 모니터링</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>기술 자문</span>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-eyebrow">Services</p>
+      <h2 class="section-title">핵심 서비스</h2>
+      <p class="section-sub">기업 IT 환경의 모든 단계를 아우르는 전문 서비스를 제공합니다.</p>
+    </div>
+    <div class="services-grid fade-up">
+
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <div class="service-num">01</div>
+        <h3 class="service-name">시스템 통합 자문 및 구축</h3>
+        <p class="service-desc">
+          기업 비즈니스 목표에 최적화된 IT 시스템 아키텍처를 설계하고 구축합니다.
+          ERP, SCM, CRM 등 핵심 시스템의 통합부터 레거시 현대화까지 전 과정을 지원합니다.
+        </p>
+        <div class="service-tags">
+          <span class="tag">ERP 통합</span>
+          <span class="tag">아키텍처 설계</span>
+          <span class="tag">마이그레이션</span>
+          <span class="tag">API 연동</span>
         </div>
+      </div>
 
-        <!-- Footer -->
-        <div class="footer-minimal">
-            &copy; 2022 Lz. All rights reserved.
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <div class="service-num">02</div>
+        <h3 class="service-name">인프라 운영 프로세스 컨설팅</h3>
+        <p class="service-desc">
+          서버, 네트워크, 클라우드 인프라의 운영 효율을 극대화합니다.
+          ITIL 기반 프로세스 정립부터 자동화 운영 체계 구축까지 체계적으로 지원합니다.
+        </p>
+        <div class="service-tags">
+          <span class="tag">ITIL 컨설팅</span>
+          <span class="tag">클라우드 운영</span>
+          <span class="tag">자동화</span>
+          <span class="tag">모니터링</span>
         </div>
-    </section>
+      </div>
 
-    <script>
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
+      <div class="service-card">
+        <div class="service-icon">◇</div>
+        <div class="service-num">03</div>
+        <h3 class="service-name">클라우드 전환 및 최적화</h3>
+        <p class="service-desc">
+          온프레미스에서 클라우드로의 안전하고 효율적인 전환을 지원합니다.
+          AWS, Azure, GCP 환경에서의 비용 최적화와 고가용성 아키텍처를 설계합니다.
+        </p>
+        <div class="service-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">GCP</span>
+          <span class="tag">비용 최적화</span>
+        </div>
+      </div>
 
-        // Add hover effects
-        document.querySelectorAll('.service-mini-card, .contact-item').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+      <div class="service-card">
+        <div class="service-icon">⬟</div>
+        <div class="service-num">04</div>
+        <h3 class="service-name">보안 아키텍처 및 컴플라이언스</h3>
+        <p class="service-desc">
+          기업 IT 환경의 보안 취약점을 진단하고 체계적인 보안 아키텍처를 수립합니다.
+          정보보호 관리체계(ISMS) 인증 지원 및 컴플라이언스 대응을 돕습니다.
+        </p>
+        <div class="service-tags">
+          <span class="tag">보안 진단</span>
+          <span class="tag">ISMS</span>
+          <span class="tag">Zero Trust</span>
+          <span class="tag">컴플라이언스</span>
+        </div>
+      </div>
 
-        // Email click functionality
-        document.querySelector('.contact-item').addEventListener('click', function() {
-            window.location.href = 'mailto:company@lim.kr';
-        });
-    </script>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left fade-up">
+        <p class="section-eyebrow">Why Lz</p>
+        <h2 class="section-title">왜 Lz를<br>선택하는가</h2>
+        <ul class="why-list">
+          <li class="why-item">
+            <span class="why-bullet"></span>
+            <div>
+              <div class="why-item-title">현장 중심의 실전 경험</div>
+              <div class="why-item-desc">10년 이상 다양한 업종의 엔터프라이즈 프로젝트를 직접 수행한 전문 인력이 고객사에 상주하며 함께 문제를 해결합니다.</div>
+            </div>
+          </li>
+          <li class="why-item">
+            <span class="why-bullet"></span>
+            <div>
+              <div class="why-item-title">기술 종속 없는 객관적 자문</div>
+              <div class="why-item-desc">특정 벤더에 종속되지 않는 독립적인 입장에서 고객의 환경과 예산에 최적화된 기술 솔루션을 추천합니다.</div>
+            </div>
+          </li>
+          <li class="why-item">
+            <span class="why-bullet"></span>
+            <div>
+              <div class="why-item-title">프로젝트 완료 후에도 지속 지원</div>
+              <div class="why-item-desc">구축 후 운영 안정화까지 책임지는 유지보수 서비스와 24/7 모니터링 체계로 장기적인 파트너십을 유지합니다.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="why-right fade-up">
+        <div class="why-cards">
+          <div class="why-card">
+            <div class="why-card-num">10+</div>
+            <div class="why-card-label">년 업력</div>
+          </div>
+          <div class="why-card">
+            <div class="why-card-num">100+</div>
+            <div class="why-card-label">완료 프로젝트</div>
+          </div>
+          <div class="why-card">
+            <div class="why-card-num">98%</div>
+            <div class="why-card-label">고객 재계약률</div>
+          </div>
+          <div class="why-card">
+            <div class="why-card-num">24/7</div>
+            <div class="why-card-label">운영 모니터링</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section id="process">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-eyebrow">Process</p>
+      <h2 class="section-title">진행 방식</h2>
+      <p class="section-sub">체계적인 4단계 프로세스로 프로젝트 성공을 보장합니다.</p>
+    </div>
+    <ol class="process-list fade-up">
+      <li class="process-item">
+        <div class="process-step">
+          <strong>01</strong>
+          Discovery
+        </div>
+        <div class="process-content">
+          <div class="process-name">현황 분석 및 요구사항 정의</div>
+          <p class="process-desc">현재 IT 환경과 비즈니스 목표를 심층 분석합니다. 인터뷰, 시스템 점검, 데이터 분석을 통해 명확한 과제와 목표를 도출합니다.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-step">
+          <strong>02</strong>
+          Design
+        </div>
+        <div class="process-content">
+          <div class="process-name">솔루션 설계 및 로드맵 수립</div>
+          <p class="process-desc">분석 결과를 바탕으로 최적의 아키텍처를 설계하고 단계별 실행 계획을 수립합니다. 리스크 평가와 대응 방안도 함께 제시합니다.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-step">
+          <strong>03</strong>
+          Execute
+        </div>
+        <div class="process-content">
+          <div class="process-name">구축 및 마이그레이션</div>
+          <p class="process-desc">수립된 계획에 따라 시스템을 구축하고 데이터를 마이그레이션합니다. 주간 보고와 투명한 커뮤니케이션으로 프로젝트 진행 상황을 공유합니다.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-step">
+          <strong>04</strong>
+          Operate
+        </div>
+        <div class="process-content">
+          <div class="process-name">운영 안정화 및 지속 지원</div>
+          <p class="process-desc">오픈 후 운영 안정화 기간 동안 밀착 지원합니다. 운영 팀 교육, 매뉴얼 제공, 정기 점검을 통해 지속적인 성능 최적화를 지원합니다.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left fade-up">
+        <p class="section-eyebrow">Contact</p>
+        <h2 class="section-title">프로젝트를<br>시작해보세요</h2>
+        <p class="section-sub">어떤 고민이든 먼저 말씀해 주세요.<br>무료 사전 상담을 제공합니다.</p>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <span class="contact-info-label">Email</span>
+            <span class="contact-info-val"><a href="mailto:company@lim.kr">company@lim.kr</a></span>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">주소</span>
+            <span class="contact-info-val">서울특별시</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">운영</span>
+            <span class="contact-info-val">월–금  09:00 – 18:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right fade-up">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="name">담당자 이름 *</label>
+              <input class="form-input" id="name" type="text" placeholder="홍길동">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="company">회사명 *</label>
+              <input class="form-input" id="company" type="text" placeholder="(주)예시회사">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="email">이메일 *</label>
+              <input class="form-input" id="email" type="email" placeholder="name@company.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">연락처</label>
+              <input class="form-input" id="phone" type="tel" placeholder="010-0000-0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label" for="service">관심 서비스</label>
+              <select class="form-select" id="service">
+                <option value="">선택해 주세요</option>
+                <option>시스템 통합 자문 및 구축</option>
+                <option>인프라 운영 프로세스 컨설팅</option>
+                <option>클라우드 전환 및 최적화</option>
+                <option>보안 아키텍처 및 컴플라이언스</option>
+                <option>기타 문의</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label" for="message">문의 내용 *</label>
+              <textarea class="form-textarea" id="message" placeholder="현재 상황과 해결하고 싶은 과제를 자유롭게 적어주세요."></textarea>
+            </div>
+          </div>
+          <button class="form-submit" onclick="handleSubmit(event)">문의 보내기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">Lz<span>.</span></a>
+      <nav class="footer-links" aria-label="footer navigation">
+        <a href="#services">서비스</a>
+        <a href="#why">회사소개</a>
+        <a href="#process">진행방식</a>
+        <a href="#contact">문의</a>
+      </nav>
+      <p class="footer-copy">© 2025 Lz. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── NAV 스크롤 효과 ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  /* ── 모바일 메뉴 ── */
+  document.getElementById('mobileBtn').addEventListener('click', () => {
+    nav.classList.toggle('menu-open');
+  });
+
+  /* ── Intersection Observer 페이드인 ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── 문의 폼 ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !message) {
+      alert('이름, 이메일, 문의 내용은 필수입니다.');
+      return;
+    }
+    const btn = e.target;
+    btn.textContent = '전송 중...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✓ 문의가 접수되었습니다';
+      btn.style.background = '#4ade80';
+    }, 1200);
+  }
+</script>
 </body>
 </html>
