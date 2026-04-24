@@ -275,6 +275,67 @@
       border-top: 1px solid var(--border);
     }
 
+    /* ── 프로덕트 섹션 ── */
+    .products {
+      padding: 5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--white);
+    }
+
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(155, 135, 245, 0.15);
+      border-color: var(--primary);
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .product-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .product-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .product-link {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
     /* ── 반응형 ── */
     @media (max-width: 600px) {
       nav { padding: 1rem; }
@@ -306,6 +367,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="#features">특징</a></li>
+      <li><a href="#products">프로덕트</a></li>
       <li><a href="#contact">문의</a></li>
     </ul>
   </nav>
@@ -341,6 +403,20 @@
         <h3>글로벌 지향</h3>
         <p>국경을 넘어 더 넓은 세상을 향해 나아가는 비전을 가지고 있습니다.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- 프로덕트 -->
+  <section class="products" id="products">
+    <h2 class="section-title">프로덕트</h2>
+    <p class="section-sub">Lz LLC가 만든 서비스입니다</p>
+    <div class="product-cards">
+      <a href="https://tax.lim.kr" target="_blank" class="product-card">
+        <span class="product-badge">세금 계산기</span>
+        <h3>연말정산 / 종합소득세 계산</h3>
+        <p>복잡한 연말정산과 종합소득세를 간편하게 계산해보세요. 누구나 쉽게 사용할 수 있습니다.</p>
+        <span class="product-link">tax.lim.kr →</span>
+      </a>
     </div>
   </section>
 
